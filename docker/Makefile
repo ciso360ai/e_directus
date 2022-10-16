@@ -15,13 +15,13 @@ build-images:
 	docker build \
 		--build-arg VERSION=$(version) \
 		--build-arg REPOSITORY=$(repository) \
-		-t directus:temp \
+		-t ciso360ai:temp \
 		-f ./Dockerfile \
 		..
 
-	docker tag directus:temp $(registry)/$(repository):$(version)
-	docker tag directus:temp $(registry)/$(repository):$(tag)
-	docker image rm directus:temp
+	docker tag ciso360ai:temp $(registry)/$(repository):$(version)
+	docker tag ciso360ai:temp $(registry)/$(repository):$(tag)
+	docker image rm ciso360ai:temp
 
 test-image:
 	docker run --rm -it $(registry)/$(repository):$(tag) $(cmd)
