@@ -174,7 +174,7 @@
 		"nodemailer-sendgrid": "^1.0.3",
 		"pg": "^8.7.3",
 		"sqlite3": "^5.0.8",
-		"tedious": "^13.0.0"
+		"tedious": "^15.1.0"
 	},
 	"gitHead": "24621f3934dc77eb23441331040ed13c676ceffd",
 	"devDependencies": {
