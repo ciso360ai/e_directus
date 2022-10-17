@@ -160,7 +160,7 @@
 		"strip-bom-stream": "^4.0.0",
 		"tmp-promise": "^3.0.3",
 		"update-check": "^1.5.4",
-		"uuid": "^8.3.2",
+		"uuid": "^9.0.0",
 		"uuid-validate": "0.0.3",
 		"vm2": "^3.9.10",
 		"wellknown": "^0.5.0"
