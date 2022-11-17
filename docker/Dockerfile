@@ -4,7 +4,7 @@ FROM node:${NODE_VERSION} as builder
 
 ARG TARGETPLATFORM
 
-WORKDIR /e_directus
+WORKDIR /directus
 COPY /dist .
 RUN \
   if [ "$TARGETPLATFORM" = 'linux/arm64' ]; then \
@@ -28,9 +28,9 @@ LABEL directus.version="${VERSION}"
 # (see https://docs.directus.io/reference/environment-variables/)
 ENV \
   DB_CLIENT="sqlite3" \
-  DB_FILENAME="/e_directus/database/database.sqlite" \
-  EXTENSIONS_PATH="/e_directus/extensions" \
-  STORAGE_LOCAL_ROOT="/e_directus/uploads"
+  DB_FILENAME="/directus/database/database.sqlite" \
+  EXTENSIONS_PATH="/directus/extensions" \
+  STORAGE_LOCAL_ROOT="/directus/uploads"
 
 RUN \
   # Upgrade system and install 'ssmtp' to be able to send mails
@@ -41,16 +41,16 @@ RUN \
   tzdata \
   # Create directory for Directus with corresponding ownership
   # (can be omitted on newer Docker versions since WORKDIR below will do the same)
-  && mkdir /e_directus && chown node:node /e_directus
+  && mkdir /directus && chown node:node /directus
 
-# Switch to user 'node' and directory '/e_directus'
+# Switch to user 'node' and directory '/directus'
 USER node
-WORKDIR /e_directus
+WORKDIR /directus
 
 # disable npm update warnings
 RUN echo "update-notifier=false" >> ~/.npmrc
 
-COPY --from=builder --chown=node:node /e_directus .
+COPY --from=builder --chown=node:node /directus .
 
 RUN \
   # Create data directories
@@ -61,9 +61,9 @@ RUN \
 
 # Expose data directories as volumes
 VOLUME \
-  /e_directus/database \
-  /e_directus/extensions \
-  /e_directus/uploads
+  /directus/database \
+  /directus/extensions \
+  /directus/uploads
 
 EXPOSE 8055
 CMD npx directus bootstrap && npx directus start
